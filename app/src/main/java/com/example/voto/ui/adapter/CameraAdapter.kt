@@ -27,15 +27,17 @@ class CameraAdapter(
         holder.apply {
             binding.tvName.text = camera.name
             binding.tvResolution.text = camera.resolution
-            binding.tvPrice.text = "Rp${Helper.formatPrice(camera.price)}.-"
+            binding.tvPrice.text = "Rp${Helper.formatPrice(camera.price!!)}.-"
 
             CoroutineScope(Dispatchers.Main).launch {
-                binding.imgPhoto.setImageBitmap(Helper.loadImage(camera.photo))
+                binding.imgPhoto.setImageBitmap(Helper.loadImage(camera.photo!!))
             }
         }
 
         holder.itemView.setOnClickListener {
-            val i = Intent(holder.itemView.context, DetailActivity::class)
+            val i = Intent(holder.itemView.context, DetailActivity::class.java)
+            i.putExtra("id", camera.id)
+            holder.itemView.context.startActivity(i)
         }
     }
 

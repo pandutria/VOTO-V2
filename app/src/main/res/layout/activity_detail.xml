@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/btnBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="back"
@@ -26,6 +27,7 @@
             android:textSize="14sp"/>
         
         <ImageView
+            android:id="@+id/imgImage"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
@@ -43,6 +45,7 @@
             android:layout_marginTop="10dp"/>
 
         <TextView
+            android:id="@+id/tvSelles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Camstore London"
@@ -367,6 +370,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rp10.000,-"

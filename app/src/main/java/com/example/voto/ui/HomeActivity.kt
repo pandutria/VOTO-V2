@@ -1,5 +1,6 @@
 package com.example.voto.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -46,6 +47,10 @@ class HomeActivity : AppCompatActivity() {
 
         binding.etSearch.addTextChangedListener {
             showData()
+        }
+
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
         }
 
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

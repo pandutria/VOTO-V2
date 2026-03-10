@@ -2,10 +2,10 @@ package com.example.voto.data.model
 
 data class Camera (
     val id: Int,
-    val name: String,
-    val resolution: String,
-    val price: Int,
-    val photo: String,
+    val name: String? = null,
+    val resolution: String? = null,
+    val price: Int? = null,
+    val photo: String? = null,
     val sellerShop: String? = null,
     val sensor: String? = null,
     val autoFocusSystem: String? = null,
