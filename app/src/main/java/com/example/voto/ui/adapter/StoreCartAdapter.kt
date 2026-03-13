@@ -21,7 +21,7 @@ class StoreCartAdapter(
         val storeCart = list[position]
         holder.apply {
             binding.cbSelected.text = storeCart.storeName
-            binding.rvCart.adapter = CartAdapter(storeCart.cart)
+            binding.rvCart.adapter = CartAdapter(position, storeCart.cart)
 
             binding.cbSelected.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked) {

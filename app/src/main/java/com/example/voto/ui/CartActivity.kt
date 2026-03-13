@@ -1,5 +1,6 @@
 package com.example.voto.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,14 @@ class CartActivity : AppCompatActivity() {
             insets
         }
 
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        binding.btn.setOnClickListener {
+            startActivity(Intent(this, CheckoutActivity::class.java))
+        }
+
         binding.rvCamera.adapter = StoreCartAdapter(CartManager.list)
         countTotal()
     }
@@ -34,7 +43,7 @@ class CartActivity : AppCompatActivity() {
         for (i in CartManager.list) {
             for (cart in i.cart) {
                 if (cart.isSelected == true) {
-                    total += cart.camera.price!!
+                    total += cart.camera.price!! * cart.qty
                 }
             }
         }

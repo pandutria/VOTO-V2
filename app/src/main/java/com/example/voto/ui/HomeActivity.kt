@@ -2,6 +2,7 @@ package com.example.voto.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -13,8 +14,11 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.example.voto.R
 import com.example.voto.data.HttpHandler
+import com.example.voto.data.TokenManager
 import com.example.voto.data.model.Camera
 import com.example.voto.data.model.Category
+import com.example.voto.data.model.User
+import com.example.voto.data.UserSession
 import com.example.voto.databinding.ActivityHomeBinding
 import com.example.voto.ui.adapter.CameraAdapter
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +35,6 @@ class HomeActivity : AppCompatActivity() {
     private val categortList: MutableList<Category> = mutableListOf()
 
     private var categoryId: Int? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -53,6 +56,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, CartActivity::class.java))
         }
 
+        me()
+
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -67,6 +72,34 @@ class HomeActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
+            }
+        }
+    }
+
+    fun me() {
+        lifecycleScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                HttpHandler().request(
+                    "me",
+                    token = TokenManager(this@HomeActivity).getToken()
+                )
+            }
+
+            val json = JSONObject(result)
+            val code = json.getInt("code")
+            val body = json.getString("body")
+
+            if(code in 200..300) {
+                val data = JSONObject(body)
+
+                UserSession.user = User(
+                    data.getString("name"),
+                    data.getString("username"),
+                    data.getString("email"),
+                    data.getString("phoneNumber"),
+                    data.getString("address"),
+                    data.getInt("votoken"),
+                )
             }
         }
     }
@@ -149,5 +182,10 @@ class HomeActivity : AppCompatActivity() {
                 binding.spinner.adapter = adapter
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        me()
     }
 }

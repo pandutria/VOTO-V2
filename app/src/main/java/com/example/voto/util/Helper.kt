@@ -11,7 +11,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 object Helper {
-    val url = "http://10.0.2.2:5000/api/"
+    val url = "http://100.100.181.124:5000/api/"
     val imageUrl = url.replace("api/", "images/")
 
     fun toast(context: Context, string: String) {

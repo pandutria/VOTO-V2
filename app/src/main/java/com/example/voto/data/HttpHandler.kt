@@ -43,6 +43,7 @@ class HttpHandler {
             response.put("code", 500)
             response.put("body", e.message)
             Log.d("httpError", e.message.toString())
+            e.printStackTrace()
 
             response.toString()
         }

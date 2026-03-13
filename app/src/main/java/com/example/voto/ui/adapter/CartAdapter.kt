@@ -3,6 +3,7 @@ package com.example.voto.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.voto.data.CartManager
 import com.example.voto.data.model.Cart
 import com.example.voto.databinding.ItemCartBinding
 import com.example.voto.ui.CartActivity
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CartAdapter(
+    private val storeIndex: Int,
     private val list: MutableList<Cart> = mutableListOf()
 ) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     class ViewHolder(val binding: ItemCartBinding) : RecyclerView.ViewHolder(binding.root)
@@ -34,10 +36,22 @@ class CartAdapter(
             }
 
             binding.btnMinus.setOnClickListener {
+                if (cart.qty == 1) {
+                    list.removeAt(position)
+                    for (i in CartManager.list) {
+                        if (i.cart.isEmpty()) {
+                            CartManager.list.removeAt(storeIndex)
+                        }
+                    }
+                    ((holder.itemView.context as CartActivity).countTotal())
+                    notifyDataSetChanged()
+                    return@setOnClickListener
+                }
                 cart.qty -= 1
                 binding.tvQty.text = cart.qty.toString()
                 binding.tvPrice.text = "Rp${Helper.formatPrice(cart.qty * cart.camera.price!!)},-"
                 ((holder.itemView.context as CartActivity).countTotal())
+                notifyDataSetChanged()
             }
 
             binding.btnPlus.setOnClickListener {
@@ -45,6 +59,7 @@ class CartAdapter(
                 binding.tvQty.text = cart.qty.toString()
                 binding.tvPrice.text = "Rp${Helper.formatPrice(cart.qty * cart.camera.price!!)},-"
                 ((holder.itemView.context as CartActivity).countTotal())
+                notifyDataSetChanged()
             }
 
             if (cart.isSelected == true) {
