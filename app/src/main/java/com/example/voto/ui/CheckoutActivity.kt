@@ -2,7 +2,6 @@ package com.example.voto.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -81,7 +80,7 @@ class CheckoutActivity : AppCompatActivity() {
                 put("items", items)
             }
         } else {
-            if (binding.etName.text.isEmpty() || binding.etPhone.text.isEmpty() || binding.etAddress.text.isEmpty())  {
+            if (binding.etName.text.isEmpty() || binding.etPhone.text.isEmpty() || binding.etAddress.text.isEmpty()) {
                 return Helper.toast(this, "All field must be filled")
             }
             rBody = JSONObject().apply {
@@ -120,32 +119,27 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     fun updateVotoken() {
-        try {
-            lifecycleScope.launch {
-                val votoken = (UserSession.user?.votoken!! + (total * 0.1 / 100).toInt())
-                val result = withContext(Dispatchers.IO) {
-                    HttpHandler().request(
-                        "me/votoken/update?value=${votoken}",
-                        "PUT",
-                        token = TokenManager(this@CheckoutActivity).getToken(),
-                    )
-                }
-
-                val json = JSONObject(result)
-                val code = json.getInt("code")
-                val body = json.getString("body")
-
-                if (code in 200..300) {
-                    Helper.toast(this@CheckoutActivity, "Update token berhasil")
-                    finish()
-                    startActivity(Intent(this@CheckoutActivity, OrderHistoryActivity::class.java))
-                } else {
-                    Helper.toast(this@CheckoutActivity, "Update token gagal")
-                }
+        lifecycleScope.launch {
+            val votoken = (UserSession.user?.votoken!! + (total * 0.1 / 100).toInt())
+            val result = withContext(Dispatchers.IO) {
+                HttpHandler().request(
+                    "me/votoken/update?value=${votoken}",
+                    "PUT",
+                    token = TokenManager(this@CheckoutActivity).getToken(),
+                )
             }
-        } catch (e: Exception) {
-            Log.d("httpDebug", e.message.toString())
-        }
 
+            val json = JSONObject(result)
+            val code = json.getInt("code")
+            val body = json.getString("body")
+
+            if (code in 200..300) {
+                Helper.toast(this@CheckoutActivity, "Update token berhasil")
+                finish()
+                startActivity(Intent(this@CheckoutActivity, OrderHistoryActivity::class.java))
+            } else {
+                Helper.toast(this@CheckoutActivity, "Update token gagal")
+            }
+        }
     }
 }
