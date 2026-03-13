@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="back"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order History"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="15dp"
+                android:textSize="26sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Votoken:"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tvVotoken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10000"
+                android:layout_marginHorizontal="15dp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-black"
+                android:textSize="20sp"/>
+            
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="40dp">
+
+                <ImageView
+                    android:id="@+id/wheel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/wheel"/>
+                
+                <ImageView
+                    android:id="@+id/needle"
+                    android:layout_width="50dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/needle"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-35dp"/>
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Tap the wheel to start your lucky spin."
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Each spin cost 2200 votoken"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

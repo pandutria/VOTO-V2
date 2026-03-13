@@ -52,8 +52,16 @@ class HomeActivity : AppCompatActivity() {
             showData()
         }
 
-        binding.cart.setOnClickListener {
+        binding.icCart.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
+        }
+
+        binding.icVtoken.setOnClickListener {
+            startActivity(Intent(this, LuckySpinActivity::class.java))
+        }
+
+        binding.icHistory.setOnClickListener {
+            startActivity(Intent(this, OrderHistoryActivity::class.java))
         }
 
         me()

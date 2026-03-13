@@ -1,5 +1,6 @@
 package com.example.voto.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -122,7 +123,6 @@ class CheckoutActivity : AppCompatActivity() {
         try {
             lifecycleScope.launch {
                 val votoken = (UserSession.user?.votoken!! + (total * 0.1 / 100).toInt())
-                Log.d("votoken", votoken.toString())
                 val result = withContext(Dispatchers.IO) {
                     HttpHandler().request(
                         "me/votoken/update?value=${votoken}",
@@ -137,6 +137,8 @@ class CheckoutActivity : AppCompatActivity() {
 
                 if (code in 200..300) {
                     Helper.toast(this@CheckoutActivity, "Update token berhasil")
+                    finish()
+                    startActivity(Intent(this@CheckoutActivity, OrderHistoryActivity::class.java))
                 } else {
                     Helper.toast(this@CheckoutActivity, "Update token gagal")
                 }

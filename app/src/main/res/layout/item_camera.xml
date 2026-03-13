@@ -17,43 +17,42 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginTop="15dp"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Fujifilm XA5"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="sans-serif-black"
-            android:textSize="16sp"/>
+            android:text="Fujifilm XA5"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvResolution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="24.1MP"
             android:layout_marginHorizontal="15dp"
             android:fontFamily="sans-serif-medium"
-            android:textSize="14sp"/>
+            android:text="24.1MP"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Rp10.000-"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="sans-serif-black"
-            android:textSize="18sp"/>
+            android:text="Rp10.000-"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>
